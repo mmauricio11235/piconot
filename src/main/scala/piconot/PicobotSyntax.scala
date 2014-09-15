@@ -4,7 +4,12 @@ import picolib.maze._
 import picolib.semantics._
 import java.io.File
 
-object PicobotSyntax {
+/** 
+ *  This is an intentionally bad internal language, but it uses all the parts of
+ *  the picolib library that you might need to implement your language
+ */
+
+object PiconotSyntax {
 
     def main(args: Array[String]) {
         println(new java.io.File( "." ).getCanonicalPath)
