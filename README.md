@@ -1,7 +1,7 @@
 
-[Picobot](https://www.cs.hmc.edu/twiki/bin/view/CS5/PicobotProgrammingGold)
-[EBF](http://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form)
-[Teams](https://github.com/hmc-cs111-fall2014/piconot/wiki/Team-sign-ups)
+[Picobot]: https://www.cs.hmc.edu/twiki/bin/view/CS5/PicobotProgrammingGold
+[EBF]: http://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form
+[Teams]: https://github.com/hmc-cs111-fall2014/piconot/wiki/Team-sign-ups
 [API]: #
 
 ## Overview
@@ -29,7 +29,13 @@ In short: get in there and play. Push internal DSLs to the limit!
      - [ ] Describe your design in `design.txt`
      - [ ] Before you implement the syntax, formally specify it in 
        `grammar-ideal.txt`
-  - [ ]  
+  - [ ] Implement your new syntax.
+     - [ ] Add files, as needed, to implement your syntax.
+     - Include two example programs
+       - [ ] `src/main/scala/piconot/Empty.scala`
+       - [ ] `src/main/scala/piconot/RightHand.scala`
+     - [ ] Describe your implementation process in `evaluation.txt`
+     - [ ] Formally specify your final syntax in `grammar-final.txt`
 
 ## Warm-up: Formal syntax
 Formally specify the syntax for [Picobot, as it's defined in CS 5](Picobot). 
