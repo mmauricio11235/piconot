@@ -1,13 +1,13 @@
 
 [Picobot]: https://www.cs.hmc.edu/twiki/bin/view/CS5/PicobotProgrammingGold
-[EBF]: http://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form
+[EBNF]: http://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form
 [Teams]: https://github.com/hmc-cs111-fall2014/piconot/wiki/Team-sign-ups
 [API]: #
 
 ## Overview
 
-This assignment asks you to re-design the syntax of an existing language (
-Picobot) and to implement your syntax as an internal DSL. The goals of
+This assignment asks you to re-design the syntax of an existing language
+(Picobot) and to implement your syntax as an internal DSL. The goals of
 this assignment are to: (a) learn how to design a brand-new syntax, (b) get
 practice formally specifying the syntax of a language, and (c) get some
 experience implementing a language the **wrong way**. You'll probably design a
@@ -22,15 +22,15 @@ In short: get in there and play. Push internal DSLs to the limit!
 
 ## Checklist
   - [ ] [Sign up for teams](Teams). Team 1 will have three people; all other 
-    teams will have two people.
+    teams will have two people
   - [ ] Formally specify the syntax for the original version of Picobot in 
-    `grammar-orig.txt`.
-  - [ ] Design a new syntax for Picobot. 
+    `grammar-orig.txt`
+  - [ ] Design a new syntax for Picobot 
      - [ ] Describe your design in `design.txt`
      - [ ] Before you implement the syntax, formally specify it in 
        `grammar-ideal.txt`
-  - [ ] Implement your new syntax.
-     - [ ] Add files, as needed, to implement your syntax.
+  - [ ] Implement your new syntax
+     - [ ] Add files, as needed, to implement your syntax
      - Include two example programs
        - [ ] `src/main/scala/piconot/Empty.scala`
        - [ ] `src/main/scala/piconot/RightHand.scala`
