@@ -21,7 +21,7 @@ experience how different a language's syntax can be from its semantics.
 In short: get in there and play. Push internal DSLs to the limit! 
 
 ## Checklist
-  - [ ] [Sign up for teams](Teams). Team 1 will have three people; all other 
+  - [ ] [Sign up for teams][Teams]. Team 1 will have three people; all other 
     teams will have two people
   - [ ] Formally specify the syntax for the original version of Picobot in 
     `grammar-orig.txt`
@@ -38,9 +38,9 @@ In short: get in there and play. Push internal DSLs to the limit!
      - [ ] Formally specify your final syntax in `grammar-final.txt`
 
 ## Warm-up: Formal syntax
-Formally specify the syntax for [Picobot, as it's defined in CS 5](Picobot). 
+Formally specify the syntax for [Picobot, as it's defined in CS 5][Picobot]. 
 Place your definition in `grammar-orig.txt`. 
-You must use [Extended Backus-Naur Form (EBNF)](EBNF) to specify the grammar.
+You must use [Extended Backus-Naur Form (EBNF)][EBNF] to specify the grammar.
 
 ## Syntax design
 Design your own syntax for Picobot. Try to come up with a design that is
