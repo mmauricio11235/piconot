@@ -12,8 +12,6 @@ import java.io.File
 object PiconotSyntax {
 
     def main(args: Array[String]) {
-        println(new java.io.File( "." ).getCanonicalPath)
-        
         val mazeFilename = "resources" + File.separator + "empty.txt"
                             
         val maze = Maze(io.Source.fromFile(mazeFilename).getLines().toList)
