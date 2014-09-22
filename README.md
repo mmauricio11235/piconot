@@ -2,7 +2,9 @@
 [Picobot]: https://www.cs.hmc.edu/twiki/bin/view/CS5/PicobotProgrammingGold
 [EBNF]: http://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form
 [Teams]: https://github.com/hmc-cs111-fall2014/piconot/wiki/Team-sign-ups
-[API]: #
+[API]: http://www.cs.hmc.edu/cs111/picolib/index.html#package
+
+# Piconot
 
 ## Overview
 
@@ -73,13 +75,25 @@ I've provided a library that implements the semantics of Picobot. you'll need to
 transform statements from your internal language into calls to the provided
 library.
 
-You'll need to understand how the Picobot semantics library works. You should
-take a look at the file `src/main/scala/piconot/EmptyAPI.scala` for an example use
-of the library and at the library's [auto-generated documentation](API).
+You'll need to understand the interface for the Picobot library (but not its
+implementation!). You should take a look at the file
+`src/main/scala/piconot/EmptyAPI.scala` for an example use of the library. You
+can also look at the library's [auto-generated documentation][API]. The code for
+the library itself is in the `lib` directory. Thanks to sbt, you shouldn't need
+to do anything special with the library to build and run your code.
 
-If you use sbt and the provided `build.sbt` file to build your code, you should 
-automatically have access to the Picobot library, and it will be included on
-your classpath when you compile and run.
+#### Building and running your code
+
+You should be able to load the code into ScalaIDE in the usual way (i.e., by
+executing `sbt eclipse` in the top-level directory).
+
+You can also run the program on the command line, by typing `sbt run` in the top
+-level directory. (Note, if you run the program from the command line, you'll
+probably get a warning about a .css file, and the graphics for the buttons will
+look a bit different. The program should still work, though.) If you use sbt and
+the provided `build.sbt` file to build your code, you should  automatically have
+access to the Picobot library, and it will be included on your classpath when
+you compile and run.
 
 ### Organizing your code
 You can and should add any files you need, to implement your language.
