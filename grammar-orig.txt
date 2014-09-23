@@ -1,0 +1,36 @@
+nonzero_digit = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+digit = "0" | nonzero_digit ;
+
+(*
+    State is can be two-digit (nonzero, can be zero) or single-digit (including
+    zero)
+*)
+state = nonzero_digit, digit | digit ;
+
+(*
+    Each direction can be a wall, "x" for nothing there, or "*" for not there.
+    The full surroundings of the picobot is composed of all four directions.
+*)
+symbol = "x" | "*" ;
+north = "N" | symbol ;
+east = "E" | symbol ;
+west = "W" | symbol ;
+south = "S" | symbol ;
+surroundings = north, east, west, south ;
+
+(*
+    Direction to move in is one of NEWS or "X" for don't move.
+*)
+move_direction = "N" | "E" | "W" | "S" | "X" ;
+
+(*
+    Parser uses space to separate pieces of the rule, so we need this.
+*)
+space = " " ;
+arrow = space, "->", space;
+
+(*
+    Compose everything!
+*)
+rule = state, space, surroundings, arrow, move_direction, space, state ;
+picobot_grammar = {rule} ;
