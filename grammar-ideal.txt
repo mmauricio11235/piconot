@@ -1,0 +1,51 @@
+digit = "0" | nonzero_digit ;
+
+upper = "A" | "B" | "C" | "D" | "E" | "F" | "G"
+       | "H" | "I" | "J" | "K" | "L" | "M" | "N"
+       | "O" | "P" | "Q" | "R" | "S" | "T" | "U"
+       | "V" | "W" | "X" | "Y" | "Z" ;
+
+lower  = "a" | "b" | "c" | "d" | "e" | "f" | "g"
+       | "h" | "i" | "j" | "k" | "l" | "m" | "n"
+       | "o" | "p" | "q" | "r" | "s" | "t" | "u"
+       | "v" | "w" | "x" | "y" | "z" ;
+
+char = digit | upper | lower
+
+
+quote = '"' ;
+state = quote, char, {char}, quote ;
+
+
+(*
+    Each direction can be a wall, "x" for nothing there, or "*" for not there.
+    The full surroundings of the picobot is composed of all four directions.
+*)
+symbol = "x" | "*" ;
+north = "N" | symbol ;
+east = "E" | symbol ;
+west = "W" | symbol ;
+south = "S" | symbol ;
+surroundings = quote, north, east, west, south, quote ;
+
+(*
+    Direction to move in is one of NEWS or "X" for don't move.
+*)
+_move_direction = "N" | "E" | "W" | "S" | "X" ;
+move_direction = quote _move_direction quote ;
+
+semi = ";"
+
+(*
+    // what it would look like:
+
+    inState "stuckOnLeft" {
+        surroundedBy "NExx" then move "W" newState "confused" ;
+        surroundedBy "Nxxx" then move "W" newState "confused" ;
+        surroundedBy "xxxx" then move "W" newState "notConfused" ;
+    };
+
+*)
+case = "surroundedBy ", surroundings, " then move ", moveDirection, " newState ", state, semi, "\n";
+rule = "inState ", state, " {\n", case, {case}, "};"
+ideal_grammar = {rule}
