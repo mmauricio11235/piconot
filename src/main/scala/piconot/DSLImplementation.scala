@@ -49,6 +49,10 @@ object DSLImplementation extends App {
     val stateNumber = numberOfStates
     numberOfStates += 1
     
+    var surr: Surroundings = Surroundings(Anything, Anything, Anything, Anything)
+    var direc: MoveDirection = North
+    var nextS: State = State("-1")
+    
     def passRules(rules: => Unit) = rules
     
     
@@ -62,15 +66,20 @@ object DSLImplementation extends App {
           case '*' => Anything
         }
       }
-
-    val tmp = surroundings.toList().map(x -> charToSurr(x))
+  
+      
+    val tmp = surroundings.toList.map(y => charToSurr(y))
     val semanticSurroundings = Surroundings(tmp(0), tmp(1), tmp(2), tmp(3))
-
-	  createRule(semanticSurroundings, x(0), x(1))
+   
+    
+    surr = semanticSurroundings
+    
+    x
+	  createRule(surr,direc,nextS)
 	}
     
    
-    def thenMove(direction: String, newState: String):(MoveDirection, State) = {
+    def thenMove(direction: String, newState: String) = {
       def strToMoveDir(x:String):MoveDirection = {
         x match {
           case "N" => North
@@ -88,12 +97,15 @@ object DSLImplementation extends App {
         val nextState = stringToStateMap(newState)
         val semanticNewState = State(nextState.stateNumber.toString())
         val moveDir = strToMoveDir(direction)
-        return (moveDir, semanticNewState)
+        direc = moveDir
+        nextS = semanticNewState
       } else {
         val nextState = new MyState(newState);
         val semanticNewState = State(nextState.stateNumber.toString())
         val moveDir = strToMoveDir(direction)
-        return (moveDir, semanticNewState)
+        direc = moveDir
+        nextS = semanticNewState
+        
       }
 
       // Parse directions/states
@@ -120,7 +132,9 @@ object DSLImplementation extends App {
                    direction: MoveDirection,
                    newState: State) {
       
-      globalRules = globalRules + Rule(State(this.stateNumber.toString()), surroundings, direction, newState)
+      
+      var testState = State(this.stateNumber.toString())
+      globalRules = Rule(testState, surroundings, direction, newState)::globalRules 
     }
   }
 
@@ -151,4 +165,5 @@ object DSLImplementation extends App {
     surroundedBy("Nxxx") (thenMove ("W", "confused"))
     surroundedBy("xxxx") (thenMove ("W", "notConfused"))
   }
+  
 }
