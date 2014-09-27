@@ -50,12 +50,14 @@ object DSLEmptyRoom extends JFXApp {
     surroundedBy("*x*x") {thenMove("S", "down")}
     surroundedBy("*x*S") {thenMove("X", "up")}
     surroundedBy("*Exx") {thenMove("S", "down")}
-    surroundedBy("xExs") {thenMove("W", "goingWest")}
+    surroundedBy("xExS") {thenMove("W", "goingWest")}
   }
   inState("goingWest") {
     surroundedBy("**x*") {thenMove("W", "goingWest")}
     surroundedBy("**W*") {thenMove("X", "up")}
   }
+
+  println("rules length" + getRules().length);
 
   object EmptyBot extends Picobot(emptyMaze, getRules())
     with TextDisplay with GUIDisplay

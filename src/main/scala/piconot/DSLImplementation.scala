@@ -45,28 +45,35 @@ object DSLImplementation {
     val stateNumber = numberOfStates
     numberOfStates += 1
 
-
     /**
       * Need to go from dummy state (strings) to PicoBot objects
       * 
       * Need to create dummy state that hasn't been made yet. 
       */
-    def createRule(surroundings: Surroundings,
-      direction: MoveDirection,
-      newState: State) {
-
-
-      var testState = State(this.stateNumber.toString())
-      globalRules = Rule(testState, surroundings, direction, newState)::globalRules 
-    }
   }
 
+  def createRule(currentState: State,
+    surroundings: Surroundings,
+    direction: MoveDirection,
+    newState: State) {
+
+    println("here")
+    //var testState = State(this.stateNumber.toString())
+    globalRules = Rule(currentState, surroundings, direction,
+      newState)::globalRules
+    println(globalRules.length)
+  }
+
+  var currentState:MyState = new MyState("foo");
 
   // Creates a new state with
   // Needs to check if state already exists. Don't add if it already does
   def inState(newState: =>  String)(rules: => Unit) {
     val stateCreate = new MyState(newState)
-    stateCreate.createRule(surr,direc,nextS)
+    rules
+    currentState = stateCreate
+    //stateCreate.createRule(surr, direc, nextS)
+
   }
 
   var surr: Surroundings = Surroundings(Anything, Anything, Anything, Anything)
@@ -89,6 +96,9 @@ object DSLImplementation {
 
     surr = semanticSurroundings
     x
+    val curr = State(currentState.stateNumber.toString())
+    println("calling createRule")
+    createRule(curr, surr,direc,nextS)
   }
 
 
