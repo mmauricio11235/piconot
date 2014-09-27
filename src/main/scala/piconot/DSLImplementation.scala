@@ -20,11 +20,6 @@ import picolib.semantics.TextDisplay
 import picolib.semantics.West
 import scalafx.application.JFXApp
 
-/**
- *  To Do List
- *  	1.) inState
- *   	2.) thenMove (combination of move and then
- */
 object DSLImplementation {
   var globalRules:List[Rule] = List()
 
@@ -50,15 +45,40 @@ object DSLImplementation {
     val stateNumber = numberOfStates
     numberOfStates += 1
 
+
+    /**
+     * Need to go from dummy state (strings) to PicoBot objects
+     * 
+     * Need to create dummy state that hasn't been made yet. 
+     */
+    def createRule(surroundings: Surroundings,
+                   direction: MoveDirection,
+                   newState: State) {
+
+
+      var testState = State(this.stateNumber.toString())
+      globalRules = Rule(testState, surroundings, direction, newState)::globalRules 
+    }
+  }
+
+
+  // Creates a new state with
+  // Needs to check if state already exists. Don't add if it already does
+  def inState(newState: =>  String)(rules: => Unit){
+    println(newState)
+    //if (stringToStateMap.contains(newState)){
+    //	val stateCreate = stringToStateMap(newState)
+    //}
+    //else{
+    //Only do this step if doesnt exist in map
+      val stateCreate = new MyState(newState)
+    //}
+	  stateCreate.createRule(surr,direc,nextS)
+  }
+
     var surr: Surroundings = Surroundings(Anything, Anything, Anything, Anything)
     var direc: MoveDirection = North
-    var nextS: State = State("-1")
-
-    def passRules(rules: => Unit) = {
-	  println("GOT TO passRules")
-	  rules
-	  println("GOT past passRules " + rules)
-	}
+    var nextS: State = State("0")
 
 
     def surroundedBy(surroundings: String)(x: => Unit) = {
@@ -80,7 +100,6 @@ object DSLImplementation {
     surr = semanticSurroundings
 
     x
-	  createRule(surr,direc,nextS)
 	}
 
 
@@ -128,43 +147,6 @@ object DSLImplementation {
       */
 
     }
-
-    /**
-     * Need to go from dummy state (strings) to PicoBot objects
-     * 
-     * Need to create dummy state that hasn't been made yet. 
-     */
-    def createRule(surroundings: Surroundings,
-                   direction: MoveDirection,
-                   newState: State) {
-
-      println("laksjdlaskdj")
-
-      var testState = State(this.stateNumber.toString())
-      globalRules = Rule(testState, surroundings, direction, newState)::globalRules 
-    }
-  }
-
-
-  // Creates a new state with
-  // Needs to check if state already exists. Don't add if it already does
-  def inState(newState: =>  String)(rules: => Unit){
-	println(newState)
-    if (stringToStateMap.contains(newState)){
-    	println("passingRules" + rules)
-    	stringToStateMap(newState).passRules(rules)
-    }
-    else{
-    //Only do this step if doesnt exist in map
-    println("passingRules" + rules)
-      new MyState(newState).passRules(rules)
-    }
-
-  }
-
-  def surroundedBy(surroundings: String)(x: => Unit) = {println("dummy surroundedBy")}
-  def thenMove(s: String, x: String) ={}
-
   def getRules() = {
     println(globalRules(0))
     globalRules
