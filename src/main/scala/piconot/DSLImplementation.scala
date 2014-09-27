@@ -40,32 +40,30 @@ object DSLImplementation {
    */
 
   class MyState(stateName: String) {
-	
+
 	  // We map the given name to the state itself
 	stringToStateMap += stateName -> this
-	
+
     // Assigning a number to the string name
     // NEED TO DO CHECK IF IT ALREADY EXISTS FIRST
     // OTHERWISE CREATE NEW
     val stateNumber = numberOfStates
     numberOfStates += 1
-    
+
     var surr: Surroundings = Surroundings(Anything, Anything, Anything, Anything)
     var direc: MoveDirection = North
     var nextS: State = State("-1")
-    
+
     def passRules(rules: => Unit) = {
 	  println("GOT TO passRules")
 	  rules
 	  println("GOT past passRules " + rules)
 	}
-    
-    
-    
-	//
+
+
     def surroundedBy(surroundings: String)(x: => Unit) = {
       println("GOT TO surroundedBy")
-      
+
       def charToSurr(x:Char):RelativeDescription = {
         x match {
           case close:Char if "NEWS".contains(close) => Blocked
@@ -73,19 +71,19 @@ object DSLImplementation {
           case '*' => Anything
         }
       }
-  
-      
+
+
     val tmp = surroundings.toList.map(y => charToSurr(y))
     val semanticSurroundings = Surroundings(tmp(0), tmp(1), tmp(2), tmp(3))
-   
-    
+
+
     surr = semanticSurroundings
-    
+
     x
 	  createRule(surr,direc,nextS)
 	}
-    
-   
+
+
     def thenMove(direction: String, newState: String) = {
       def strToMoveDir(x:String):MoveDirection = {
         x match {
@@ -113,7 +111,7 @@ object DSLImplementation {
         val moveDir = strToMoveDir(direction)
         direc = moveDir
         nextS = semanticNewState
-        
+
       }
 
       // Parse directions/states
@@ -130,7 +128,7 @@ object DSLImplementation {
       */
 
     }
-    
+
     /**
      * Need to go from dummy state (strings) to PicoBot objects
      * 
@@ -139,9 +137,9 @@ object DSLImplementation {
     def createRule(surroundings: Surroundings,
                    direction: MoveDirection,
                    newState: State) {
-      
+
       println("laksjdlaskdj")
-      
+
       var testState = State(this.stateNumber.toString())
       globalRules = Rule(testState, surroundings, direction, newState)::globalRules 
     }
@@ -161,9 +159,9 @@ object DSLImplementation {
     println("passingRules" + rules)
       new MyState(newState).passRules(rules)
     }
-    
+
   }
-  
+
   def surroundedBy(surroundings: String)(x: => Unit) = {println("dummy surroundedBy")}
   def thenMove(s: String, x: String) ={}
 
@@ -171,10 +169,5 @@ object DSLImplementation {
     println(globalRules(0))
     globalRules
   }
-  
-  
-  /**
-   *  Definition of a state
-   */
-  
+
 }
