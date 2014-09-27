@@ -1,0 +1,10 @@
+We decided to change the syntax for the inner declarations from
+
+    surroundedBy "NExx" then move "W" newState "confused"
+
+and instead merge then move into thenDo, and also remove the newState keyword
+(instead adding the new state argument into the thenDo call).  This also
+necessitated adding parentheses, now that we have two arguments to thenDo, so w
+figured we should give surroundedBy parentheses as well, for consistency.
+
+    surroundedBy("NExx") thenDo("W", "confused")
