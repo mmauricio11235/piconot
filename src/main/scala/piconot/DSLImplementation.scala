@@ -54,12 +54,18 @@ object DSLImplementation {
     var direc: MoveDirection = North
     var nextS: State = State("-1")
     
-    def passRules(rules: => Unit) = rules
+    def passRules(rules: => Unit) = {
+	  println("GOT TO passRules")
+	  rules
+	  println("GOT past passRules " + rules)
+	}
     
     
     
 	//
     def surroundedBy(surroundings: String)(x: => Unit) = {
+      println("GOT TO surroundedBy")
+      
       def charToSurr(x:Char):RelativeDescription = {
         x match {
           case close:Char if "NEWS".contains(close) => Blocked
@@ -134,6 +140,7 @@ object DSLImplementation {
                    direction: MoveDirection,
                    newState: State) {
       
+      println("laksjdlaskdj")
       
       var testState = State(this.stateNumber.toString())
       globalRules = Rule(testState, surroundings, direction, newState)::globalRules 
@@ -146,19 +153,26 @@ object DSLImplementation {
   def inState(newState: =>  String)(rules: => Unit){
 	println(newState)
     if (stringToStateMap.contains(newState)){
+    	println("passingRules" + rules)
     	stringToStateMap(newState).passRules(rules)
     }
     else{
     //Only do this step if doesnt exist in map
-    new MyState(newState).passRules(rules)
+    println("passingRules" + rules)
+      new MyState(newState).passRules(rules)
     }
     
   }
   
-  def surroundedBy(surroundings: String)(x: => Unit) = {}
+  def surroundedBy(surroundings: String)(x: => Unit) = {println("dummy surroundedBy")}
   def thenMove(s: String, x: String) ={}
 
-
+  def getRules() = {
+    println(globalRules(0))
+    globalRules
+  }
+  
+  
   /**
    *  Definition of a state
    */

@@ -20,6 +20,7 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp
 
 import DSLImplementation.surroundedBy
+import DSLImplementation.getRules
 import DSLImplementation.inState
 import DSLImplementation.thenMove
 import DSLImplementation.globalRules
@@ -56,7 +57,7 @@ object DSLEmptyRoom extends JFXApp {
     surroundedBy("**W*") {thenMove("X", "up")}
   }
 
-  object EmptyBot extends Picobot(emptyMaze, DSLImplementation.globalRules)
+  object EmptyBot extends Picobot(emptyMaze, getRules())
     with TextDisplay with GUIDisplay
 
   stage = EmptyBot.mainStage
