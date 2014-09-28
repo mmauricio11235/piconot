@@ -26,7 +26,7 @@ object DSLImplementation {
   /**
     *  Global number will keep track of the number of states there are
     */
-  var numberOfStates = 0
+  var numberOfStates = -1
 
   var stringToStateMap: Map[String, MyState] = Map[String, MyState]()
 
@@ -57,10 +57,9 @@ object DSLImplementation {
     direction: MoveDirection,
     newState: State) {
 
-    println("here")
     //var testState = State(this.stateNumber.toString())
-    globalRules = Rule(currentState, surroundings, direction,
-      newState)::globalRules
+    globalRules = globalRules ::: List(Rule(currentState, surroundings, direction,
+      newState))
     println(globalRules.length)
   }
 
@@ -97,7 +96,7 @@ object DSLImplementation {
     surr = semanticSurroundings
     x
     val curr = State(currentState.stateNumber.toString())
-    println("calling createRule")
+    println("calling createRule, next state is " + nextS)
     createRule(curr, surr,direc,nextS)
   }
 
@@ -119,13 +118,13 @@ object DSLImplementation {
     // map
     if(stringToStateMap.contains(newState)) {
       val nextState = stringToStateMap(newState)
-      val semanticNewState = State(nextState.stateNumber.toString())
+      val semanticNewState = State((nextState.stateNumber-1).toString())
       val moveDir = strToMoveDir(direction)
       direc = moveDir
       nextS = semanticNewState
     } else {
       val nextState = new MyState(newState);
-      val semanticNewState = State(nextState.stateNumber.toString())
+      val semanticNewState = State((nextState.stateNumber-1).toString())
       val moveDir = strToMoveDir(direction)
       direc = moveDir
       nextS = semanticNewState
