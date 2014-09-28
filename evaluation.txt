@@ -1,10 +1,57 @@
-We decided to change the syntax for the inner declarations from
+Names: Ellen Hui and Mauricio Molina
+Date: September 28, 2014
+Domain Specific Languages
+Professor Ben
+
+
+
+
+
+- New syntax for defining picobot code
+
+	We decided to change the syntax for the inner declarations from
 
     surroundedBy "NExx" then move "W" newState "confused"
 
-and instead merge then move into thenDo, and also remove the newState keyword
-(instead adding the new state argument into the thenDo call).  This also
-necessitated adding parentheses, now that we have two arguments to thenDo, so w
-figured we should give surroundedBy parentheses as well, for consistency.
+	and instead merge then move into thenDo, and also remove the newState keyword
+	(instead adding the new state argument into the thenDo call).  This also
+	necessitated adding parentheses, now that we have two arguments to thenDo, so w
+	figured we should give surroundedBy parentheses as well, for consistency.
 
-    surroundedBy("NExx") thenDo("W", "confused")
+    surroundedBy("NExx") thenMove("W", "confused")
+
+	although not as clean and clear about what they're doing, it allows for a conditional structure rule creation. 
+
+	inState("StateName"){							if inState("StateName"){
+		surroundedBy("NExx") {								if(surroundedBy(Surroundings)){
+			thenMove("W", "confused")								thenMove(Direction, newState)
+		}													}
+	}	 											}
+
+
+
+	Originally started with a myState class that would hold all the information about a state
+	under our implementation and handle creation of rules defined by the user. However
+	we ended up finding scoping issues where we could not execute code in the way that we wanted. 
+	We attempted passing units of code through 3 methods to get it to our myClass constructor, but 
+	ended up losing that code while passing. The solution ended up being to get rid of the myState class entirely 
+	and simply mapped from string name to state.
+
+
+
+- Allowing user to user string names instead of requiring numbers
+
+	We mapped the string class names given by user to states using a map. While the user will use the state name they gave, 
+	we are still using number values to define states. It is hidden from the user. 
+
+
+- On a scale of 1-10, how much would you say you changed your syntax? 
+
+	We'd say we changed 3. The biggest changes were adding curly braces and parenthesis, and combining then and move into 
+	one keyword. 
+
+- On a scale of 1-10, how difficult was it to map your syntax to semantics? 
+
+	About a 6. Our biggest challenge was finding the correct architecture to hold and create rules. 
+	A big challenge was learning the limitations of scala. In the end, our solution ended up making 
+	our code more readable and easier to follow. 
