@@ -27,20 +27,6 @@ import DSLImplementation.globalRules
 
 object DSLEmptyRoom extends JFXApp {
   val emptyMaze = Maze("resources" + File.separator + "empty.txt")
-  /*
-
-   0 xx** -> N 0
-   0 Nx** -> E 1
-
-   1 *x*x -> S 1
-   1 *x*S -> X 0
-   1 *Exx -> S 1
-   1 xExS -> W 2
-
-   2 **x* -> W 2
-   2 **W* -> x 0
-
-  */
 
   inState("up") {
     surroundedBy("xx**") {thenMove("N", "up")}
@@ -56,14 +42,6 @@ object DSLEmptyRoom extends JFXApp {
     surroundedBy("**x*") {thenMove("W", "goingWest")}
     surroundedBy("**W*") {thenMove("X", "up")}
   }
-
-/*
-  inState("this") {
-    surroundedBy("****") {thenMove("N", "this") }
-  }
-  */
-
-  println("rules length" + getRules().length);
 
   object EmptyBot extends Picobot(emptyMaze, getRules())
     with TextDisplay with GUIDisplay

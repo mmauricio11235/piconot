@@ -106,6 +106,7 @@ object DSLImplementation {
 
     }
   }
+
   def getRules() = {
     globalRules
   }
