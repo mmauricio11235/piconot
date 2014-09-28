@@ -28,51 +28,34 @@ object DSLImplementation {
     */
   var numberOfStates = -1
 
-  var stringToStateMap: Map[String, MyState] = Map[String, MyState]()
-
-  /**
-    * Need a way to know how many states there are.
-    */
-
-  class MyState(stateName: String) {
-
-    // We map the given name to the state itself
-    stringToStateMap += stateName -> this
-
-    // Assigning a number to the string name
-    // NEED TO DO CHECK IF IT ALREADY EXISTS FIRST
-    // OTHERWISE CREATE NEW
-    val stateNumber = numberOfStates
-    numberOfStates += 1
-
-    /**
-      * Need to go from dummy state (strings) to PicoBot objects
-      * 
-      * Need to create dummy state that hasn't been made yet. 
-      */
-  }
+  var stringToStateMap: Map[String, State] = Map[String, State]()
 
   def createRule(currentState: State,
     surroundings: Surroundings,
     direction: MoveDirection,
     newState: State) {
 
-    //var testState = State(this.stateNumber.toString())
     globalRules = globalRules ::: List(Rule(currentState, surroundings, direction,
       newState))
-    println(globalRules.length)
   }
 
-  var currentState:MyState = new MyState("foo");
+  var currentState:State = new State("0");
+
+  def nextStateNum():String = {
+    numberOfStates += 1
+    return numberOfStates.toString()
+  }
 
   // Creates a new state with
   // Needs to check if state already exists. Don't add if it already does
   def inState(newState: =>  String)(rules: => Unit) {
-    val stateCreate = new MyState(newState)
+    if (stringToStateMap.contains(newState) )  {
+      currentState = stringToStateMap(newState)
+    } else {
+      currentState = State(nextStateNum)
+      stringToStateMap += newState -> currentState
+    }
     rules
-    currentState = stateCreate
-    //stateCreate.createRule(surr, direc, nextS)
-
   }
 
   var surr: Surroundings = Surroundings(Anything, Anything, Anything, Anything)
@@ -80,7 +63,6 @@ object DSLImplementation {
   var nextS: State = State("0")
 
   def surroundedBy(surroundings: String)(x: => Unit) = {
-    println("GOT TO surroundedBy")
 
     def charToSurr(x:Char):RelativeDescription = {
       x match {
@@ -95,9 +77,7 @@ object DSLImplementation {
 
     surr = semanticSurroundings
     x
-    val curr = State(currentState.stateNumber.toString())
-    println("calling createRule, next state is " + nextS)
-    createRule(curr, surr,direc,nextS)
+    createRule(currentState, surr,direc,nextS)
   }
 
 
@@ -112,27 +92,21 @@ object DSLImplementation {
       }
     }
 
-    //var nextState:MyState;
-
-    // make new MyState if i haven't already (dummy) otherwise just get from
-    // map
     if(stringToStateMap.contains(newState)) {
       val nextState = stringToStateMap(newState)
-      val semanticNewState = State((nextState.stateNumber-1).toString())
       val moveDir = strToMoveDir(direction)
       direc = moveDir
-      nextS = semanticNewState
+      nextS = nextState
     } else {
-      val nextState = new MyState(newState);
-      val semanticNewState = State((nextState.stateNumber-1).toString())
+      val nextState = State(newState);
+      stringToStateMap += newState -> nextState
       val moveDir = strToMoveDir(direction)
       direc = moveDir
-      nextS = semanticNewState
+      nextS = nextState
 
     }
   }
   def getRules() = {
-    println(globalRules(0))
     globalRules
   }
 }
