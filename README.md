@@ -38,6 +38,7 @@ In short: get in there and play. Push internal DSLs to the limit!
        - [ ] `src/main/scala/piconot/RightHand.scala`
      - [ ] Describe your implementation process in `evaluation.txt`
      - [ ] Formally specify your final syntax in `grammar-final.txt`
+  - [ ] Critique another team's design and implementation
 
 ## Warm-up: Formal syntax
 Formally specify the syntax for [Picobot, as it's defined in CS 5][Picobot]. 
@@ -120,3 +121,17 @@ difficult"), how difficult was it to map your syntax to the semantics?
 ### Formalize your final syntax
 After you've finished implementing, formally specify the syntax of your internal
 DSL in `grammar-actual.txt`
+
+## Peer-review another team's work
+Comment on another team's design and implementation. You should look through
+their grammars, pay special attention to their `design.txt` file and look over
+their implementation. You might consider the following questions:
+
+  - What are your responses to their original grammar design? Is it designed
+  appropriately for its target audience. What do you like about it? Do you have 
+  any improvements to suggest? 
+  - What good insights about implementation did the team in `design.txt`? Did
+  you have any experiences that were similar to the team?
+  - Are there any implementation tricks that you can suggest to the team?
+  Anything you see that might make the implementation easier or more like the
+  original design?
